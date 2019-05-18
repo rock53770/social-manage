@@ -21,12 +21,15 @@ const routes = [{
       },
       children: [{
         path: 'manager',
+        name:'land-manager',
         component:lazyLoadView(()=>import(/* webpackChunkName: "land" */'@/page/land/manager')),
       },{
         path: 'operator',
+        name:'land-operator',
         component:lazyLoadView(()=>import(/* webpackChunkName: "land" */'@/page/land/operator')),
       },{
         path: 'leader',
+        name:'land-leader',
         component:lazyLoadView(()=>import(/* webpackChunkName: "land" */'@/page/land/leader')),
       }]
     },{

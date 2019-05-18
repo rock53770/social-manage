@@ -2,17 +2,16 @@
   <div class="app-wrapper" :class="{'hideSidebar':sideBar.isCollapse}">
     <sidebar class="sidebar-container"/>
     <div class="main-container">
-      <Navbar></Navbar>
-      <div class="sub-container">
-        <router-view></router-view>
+      <Navbar/>
+      <div class="app-main">
+        <AppMain/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// import { Navbar, Sidebar, AppMain, TagsView } from './components'
-import { Navbar, Sidebar } from './components'
+import { Navbar, Sidebar, AppMain, } from './components'
 // import ResizeMixin from './mixin/ResizeHandler'
 
 export default {
@@ -25,7 +24,7 @@ export default {
   components: {
     Navbar,
     Sidebar,
-    // AppMain,
+    AppMain,
     // TagsView
   },
   computed: {
@@ -57,6 +56,16 @@ export default {
     width:100%!important;
   }
 }
+.main-container {
+  margin-left:200px;
+  transition: margin-left 0.28s;
+  box-sizing:border-box;
+  height:100%;
+  .app-main{
+    padding-top:100px;
+    box-sizing:border-box;
+  }
+}
 .hideSidebar{
   .sidebar-container{
     width:54px;
@@ -67,13 +76,5 @@ export default {
   .navbar{
     left:54px;
   }
-}
-
-.main-container {
-  margin-left:200px;
-  transition: margin-left 0.28s;
-  box-sizing:border-box;
-  height:100%;
-
 }
 </style>

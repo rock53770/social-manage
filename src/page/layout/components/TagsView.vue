@@ -9,22 +9,21 @@
         :key="tag.path"
         class="tags-view-item"
         @contextmenu.prevent.native="openMenu(tag,$event)">
-        {{ generateTitle(tag.title) }}
+        {{tag.name}}
         <span class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)"/>
       </router-link>
     </scroll-pane>
     <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
-      <li @click="refreshSelectedTag(selectedTag)">{{ $t('tagsView.refresh') }}</li>
-      <li @click="closeSelectedTag(selectedTag)">{{ $t('tagsView.close') }}</li>
-      <li @click="closeOthersTags">{{ $t('tagsView.closeOthers') }}</li>
-      <li @click="closeAllTags">{{ $t('tagsView.closeAll') }}</li>
+      <li @click="refreshSelectedTag(selectedTag)">刷新</li>
+      <li @click="closeSelectedTag(selectedTag)">关闭</li>
+      <li @click="closeOthersTags">关闭其它</li>
+      <li @click="closeAllTags">关闭所有</li>
     </ul>
   </div>
 </template>
 
 <script>
 import ScrollPane from '@/components/ScrollPane'
-import { generateTitle } from '@/utils/i18n'
 
 export default {
   components: { ScrollPane },
@@ -58,7 +57,6 @@ export default {
     this.addViewTags()
   },
   methods: {
-    generateTitle, // generateTitle by vue-i18n
     generateRoute() {
       if (this.$route.name) {
         return this.$route
@@ -73,6 +71,7 @@ export default {
       if (!route) {
         return false
       }
+      console.log(route)
       this.$store.dispatch('addView', route)
     },
     moveToCurrentTag() {
@@ -138,7 +137,7 @@ export default {
 }
 </script>
 
-<style rel="stylesheet/scss" lang="scss" scoped>
+<style lang="less" scoped>
 .tags-view-container {
   height: 34px;
   width: 100%;
@@ -205,7 +204,7 @@ export default {
 }
 </style>
 
-<style rel="stylesheet/scss" lang="scss">
+<style lang="less">
 //reset element css of el-icon-close
 .tags-view-wrapper {
   .tags-view-item {

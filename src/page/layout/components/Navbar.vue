@@ -1,24 +1,23 @@
 <template>
-  <div class="navbar-box">
-    <!-- <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container"/> -->
-    <div class="navbar">
-      <div class="nav h50">
-        <!-- <div class="nav-list"> -->
-          <ul class="clearfix">
-            <li class="fl active" @click="click(index)" v-for="(i,index) in allList" :key="index" v-text="i.meta.title"></li>
-          </ul>
-        <!-- </div> -->
-        <div class="right-menu pr10">
-          <i class="fa fa-bell-o ft20" aria-hidden="true"></i>
-        </div>
+  <div class="navbar">
+    <div class="nav h50">
+      <!-- <div class="nav-list"> -->
+        <ul class="clearfix">
+          <li class="fl active" @click="click(index)" v-for="(i,index) in allList" :key="index" v-text="i.meta.title"></li>
+        </ul>
+      <!-- </div> -->
+      <div class="right-menu pr10">
+        <i class="fa fa-bell-o ft20" aria-hidden="true"></i>
       </div>
-      <div>scrollpang</div>
     </div>
+    <tags-view/>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+
+import TagsView  from './TagsView'
 // import Breadcrumb from '@/components/Breadcrumb'
 // import Hamburger from '@/components/Hamburger'
 // import ErrorLog from '@/components/ErrorLog'
@@ -29,7 +28,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   components: {
-    // Breadcrumb,
+    TagsView,
     // Hamburger,
     // ErrorLog,
     // Screenfull,
@@ -62,9 +61,6 @@ export default {
 </script>
 
 <style lang="less">
-.navbar-box{
-  height:100px
-};
 .navbar {
   height: 100px;
   position: fixed;

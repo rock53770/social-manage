@@ -48,9 +48,6 @@
         this.$store.dispatch("toggleSideBar");
       },
       select(index, indexPath) {
-
-        console.log(index)
-        console.log(indexPath)
         this.$router.push({path:index})
       }
     }

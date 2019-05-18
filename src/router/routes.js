@@ -8,24 +8,71 @@ function lazyLoadView (AsyncView) {
 
 const routes = [{
       path: '/',
-      redirect: {name: 'access'}
+      redirect: '/land/manager'
   }, {
       path: '/login',
       name: 'login',
       component: Login
   }, {
-      // 首页
-      path: '/access',
-      component: Layout,
+      path: '/land',
+      component:Layout,
       meta:{
-          requireLogin:true,
+        requireLogin:true,
       },
       children: [{
-          path: '',
-          name: 'access',
-          component: () => lazyLoadView(import(/* webpackChunkName: "access" */ '../page/access/index.vue'))
+        path: 'manager',
+        component:lazyLoadView(()=>import(/* webpackChunkName: "land" */'@/page/land/manager')),
+      },{
+        path: 'operator',
+        component:lazyLoadView(()=>import(/* webpackChunkName: "land" */'@/page/land/operator')),
+      },{
+        path: 'leader',
+        component:lazyLoadView(()=>import(/* webpackChunkName: "land" */'@/page/land/leader')),
       }]
-  }, {
+    },{
+      path: '/privilege',
+      component:Layout,
+      children: [{
+        path: 'organization',
+        component:lazyLoadView(()=>import(/* webpackChunkName: "privilege" */'@/page/privilege/organization')),
+      },{
+        path: 'user_manage',
+        component:lazyLoadView(()=>import(/* webpackChunkName: "privilege" */'@/page/privilege/user_manage')),
+      },{
+        path: 'role_manage',
+        component:lazyLoadView(()=>import(/* webpackChunkName: "privilege" */'@/page/privilege/role_manage')),
+      },{
+        path: 'sys_para',
+        component:lazyLoadView(()=>import(/* webpackChunkName: "privilege" */'@/page/privilege/sys_para')),
+      },{
+        path: 'data_dictionary',
+        component:lazyLoadView(()=>import(/* webpackChunkName: "privilege" */'@/page/privilege/data_dictionary')),
+      },{
+        path: 'log_manage',
+        component:lazyLoadView(()=>import(/* webpackChunkName: "privilege" */'@/page/privilege/log_manage')),
+      },{
+        path: 'database_manage',
+        component:lazyLoadView(()=>import(/* webpackChunkName: "privilege" */'@/page/privilege/database_manage')),
+      },{
+        path: 'ftp_manage',
+        component:lazyLoadView(()=>import(/* webpackChunkName: "privilege" */'@/page/privilege/ftp_manage')),
+      },{
+        path: 'api_manage',
+        component:lazyLoadView(()=>import(/* webpackChunkName: "privilege" */'@/page/privilege/api_manage')),
+      }]
+    },{
+      path: '/resource',
+      component:Layout,
+      meta:{
+        requireLogin:true,
+      },
+      children: [{
+        path: 'manager',
+        meta:{
+            title:'管理员',
+        }
+      }]
+    },{
       path: '*',
       redirect: '/'
   }]

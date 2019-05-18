@@ -1,122 +1,67 @@
 <template>
   <el-scrollbar wrap-class="scrollbar-wrapper">
-    <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-      <el-radio-button :label="false">展开</el-radio-button>
-      <el-radio-button :label="true">收起</el-radio-button>
-    </el-radio-group>
+    <div class="pos-a t0 r0 pt10 pr10">
+      <div @click="toggle" class="fa ta-c fa-2x cl-blue cus-pt" :class="[sideBar.isCollapse ? 'fa-toggle-right' : 'fa-toggle-left']"></div>
+    </div>
+    <div class="pos-r cl-white pl10 h40 mt34">
+      <img src="~@/assets/icons/bank.png" class="w40 h40 pos-a">
+      <div class="ml40 lh40 pl10 of-hide" v-if="!sideBar.isCollapse">
+        您好：张三
+      </div>
+    </div>
     <el-menu
-      default-active="2"
+      :default-active="$route.path"
       class="el-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose"
-      :collapse="isCollapse"
-      background-color="#545c64"
+      @select="select"
+      :collapse="sideBar.isCollapse"
+      mode="vertical"
+      background-color="#304156"
       text-color="#fff"
       active-text-color="#ffd04b">
-      <el-submenu index="1">
-        <template slot="title">
-          <i class="el-icon-location"></i>
-          <span>导航一</span>
-        </template>
-        <el-menu-item-group>
-          <template slot="title">分组一</template>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="1-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="1-4-1">选项1</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item index="2">
+      <el-menu-item :index="nowList.path + '/' + i.path" v-for="(i,index) in nowList.children" :key="index" >
         <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
-      </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-setting"></i>
-        <span slot="title">导航三</span>
-      </el-menu-item>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
-      </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-setting"></i>
-        <span slot="title">导航三</span>
-      </el-menu-item>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
-      </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-setting"></i>
-        <span slot="title">导航三</span>
-      </el-menu-item>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
-      </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-setting"></i>
-        <span slot="title">导航三</span>
-      </el-menu-item>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
-      </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-setting"></i>
-        <span slot="title">导航三</span>
-      </el-menu-item>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
-      </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-setting"></i>
-        <span slot="title">导航三</span>
-      </el-menu-item>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
-      </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-setting"></i>
-        <span slot="title">导航三</span>
+        <span slot="title">{{i.meta.title}}</span>
       </el-menu-item>
     </el-menu>
   </el-scrollbar>
 </template>
-<style>
-  .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
+<script>
+  export default {
+    data() {
+      return {
+        // isCollapse: true
+      };
+    },
+    computed: {
+      sideBar () {
+        return this.$store.state.app.sideBar
+      },
+      nowList () {
+        let now = this.$store.state.nav.now
+        return this.$store.state.nav.allList[now]
+      },
+    },
+    methods: {
+      toggle() {
+        this.$store.dispatch("toggleSideBar");
+      },
+      select(index, indexPath) {
+
+        console.log(index)
+        console.log(indexPath)
+        this.$router.push({path:index})
+      }
+    }
   }
+</script>
+<style>
   .scrollbar-wrapper {
-    background-color: rgb(84, 92, 100);
+    background-color: #304156;
     overflow-x:hidden;
     overflow-y:auto;
     padding-right:20px;
     height: 100%;
   }
 </style>
-
-<script>
-  export default {
-    data() {
-      return {
-        isCollapse: true
-      };
-    },
-    methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      }
-    }
-  }
-</script>

@@ -1,47 +1,37 @@
 <template>
-  <div class="app-wrapper">
+  <div class="app-wrapper" :class="{'hideSidebar':sideBar.isCollapse}">
     <sidebar class="sidebar-container"/>
-    <!-- <div class="sidebar-container">
-      <div style="height:13000px">11</div>
-    </div> -->
     <div class="main-container">
-      <div>head</div>
-      <div class="sub-container"></div>
-
+      <Navbar></Navbar>
+      <div class="sub-container">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 // import { Navbar, Sidebar, AppMain, TagsView } from './components'
-import {  Sidebar } from './components'
+import { Navbar, Sidebar } from './components'
 // import ResizeMixin from './mixin/ResizeHandler'
 
 export default {
   name: 'Layout',
-  replace: true,
+  data(){
+    return {
+      isCollapse:false
+    }
+  },
   components: {
-    // Navbar,
+    Navbar,
     Sidebar,
     // AppMain,
     // TagsView
   },
-  // mixins: [ResizeMixin],
   computed: {
-    // sidebar() {
-    //   return this.$store.state.app.sidebar
-    // },
-    // device() {
-    //   return this.$store.state.app.device
-    // },
-    // classObj() {
-    //   return {
-    //     hideSidebar: !this.sidebar.opened,
-    //     openSidebar: this.sidebar.opened,
-    //     withoutAnimation: this.sidebar.withoutAnimation,
-    //     mobile: this.device === 'mobile'
-    //   }
-    // }
+    sideBar () {
+      return this.$store.state.app.sideBar
+    },
   },
   methods: {
     handleClickOutside() {
@@ -61,12 +51,29 @@ export default {
   width: 200px;
   height: 100%;
   overflow: hidden;
+  transition: width 0.28s;
+  .el-menu{
+    border:none;
+    width:100%!important;
+  }
+}
+.hideSidebar{
+  .sidebar-container{
+    width:54px;
+  }
+  .main-container{
+    margin-left:54px;
+  }
+  .navbar{
+    left:54px;
+  }
 }
 
 .main-container {
   margin-left:200px;
-  padding-top:50px;
+  transition: margin-left 0.28s;
   box-sizing:border-box;
   height:100%;
+
 }
 </style>

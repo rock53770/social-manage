@@ -1,50 +1,19 @@
 <template>
-  <div class="navbar">
+  <div class="navbar-box">
     <!-- <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container"/> -->
-
-    <!-- <breadcrumb class="breadcrumb-container"/> -->
-
-    <!-- <div class="right-menu">
-      <template v-if="device!=='mobile'">
-        <error-log class="errLog-container right-menu-item"/>
-
-        <el-tooltip :content="$t('navbar.screenfull')" effect="dark" placement="bottom">
-          <screenfull class="screenfull right-menu-item"/>
-        </el-tooltip>
-
-        <el-tooltip :content="$t('navbar.size')" effect="dark" placement="bottom">
-          <size-select class="international right-menu-item"/>
-        </el-tooltip>
-
-        <lang-select class="international right-menu-item"/>
-
-        <el-tooltip :content="$t('navbar.theme')" effect="dark" placement="bottom">
-          <theme-picker class="theme-switch right-menu-item"/>
-        </el-tooltip>
-      </template>
-
-      <el-dropdown class="avatar-container right-menu-item" trigger="click">
-        <div class="avatar-wrapper">
-          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
-          <i class="el-icon-caret-bottom"/>
+    <div class="navbar">
+      <div class="nav h50">
+        <!-- <div class="nav-list"> -->
+          <ul class="clearfix">
+            <li class="fl active" @click="click(index)" v-for="(i,index) in allList" :key="index" v-text="i.meta.title"></li>
+          </ul>
+        <!-- </div> -->
+        <div class="right-menu pr10">
+          <i class="fa fa-bell-o ft20" aria-hidden="true"></i>
         </div>
-        <el-dropdown-menu slot="dropdown">
-          <router-link to="/">
-            <el-dropdown-item>
-              {{ $t('navbar.dashboard') }}
-            </el-dropdown-item>
-          </router-link>
-          <a target="_blank" href="https://github.com/PanJiaChen/vue-element-admin/">
-            <el-dropdown-item>
-              {{ $t('navbar.github') }}
-            </el-dropdown-item>
-          </a>
-          <el-dropdown-item divided>
-            <span style="display:block;" @click="logout">{{ $t('navbar.logOut') }}</span>
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-    </div> -->
+      </div>
+      <div>scrollpang</div>
+    </div>
   </div>
 </template>
 
@@ -69,16 +38,19 @@ export default {
     // ThemePicker
   },
   computed: {
-    // ...mapGetters([
-    //   'sidebar',
-    //   'name',
-    //   'avatar',
-    //   'device'
-    // ])
+    allList () {
+      return this.$store.state.nav.allList
+    },
+    now () {
+      return this.$store.state.nav.now
+    },
   },
   methods: {
     toggleSideBar() {
       this.$store.dispatch('toggleSideBar')
+    },
+    click(index) {
+      this.$store.dispatch('change',index)
     },
     logout() {
       this.$store.dispatch('LogOut').then(() => {
@@ -89,16 +61,40 @@ export default {
 }
 </script>
 
-<style rel="stylesheet/scss" lang="scss" scoped>
+<style lang="less">
+.navbar-box{
+  height:100px
+};
 .navbar {
-  height: 50px;
-  line-height: 50px;
-  border-radius: 0px !important;
-  .hamburger-container {
-    line-height: 58px;
+  height: 100px;
+  position: fixed;
+  top:0;
+  left:200px;
+  right:0;
+  transition: left 0.28s;
+  .nav {
+    line-height: 50px;
     height: 50px;
-    float: left;
-    padding: 0 10px;
+    background-color:blue;
+    color:white;
+    cursor:pointer;
+    .nav-list{
+      height:50px;
+      overflow-x:scroll;
+      overflow-y: hidden;
+    }
+    ul{
+      height:50px;
+      overflow: hidden
+    }
+    li{
+      float: left;
+      box-sizing: border-box;
+      padding: 0 10px;
+      // &.active{
+
+      // }
+    }
   }
   .breadcrumb-container{
     float: left;
@@ -108,8 +104,10 @@ export default {
     vertical-align: top;
   }
   .right-menu {
-    float: right;
-    height: 100%;
+    position:absolute;
+    top:0;
+    right:0;
+    height:50px;
     &:focus{
      outline: none;
     }

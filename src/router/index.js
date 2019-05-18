@@ -33,10 +33,11 @@ router.beforeEach((to, from, next) => {
             if (Util.getCookie("AccessToken")) {
                 next()
             } else {
-                next({
-                    path: '/login',
-                    query: { redirect: to.fullPath }
-                })
+                // next({
+                //     path: '/login',
+                //     query: { redirect: to.fullPath }
+                // })
+                next()
             }
         } else {
             next()

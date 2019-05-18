@@ -9,11 +9,11 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 import './config'
 import './lib/util'
-
+import './lib/setPageTitle'
 import Vue from 'vue'
 import './directive/index'
 import './filter/index'
-// import store from './store/index'
+import store from './store/index'
 
 
 import './assets/main.less'
@@ -26,7 +26,7 @@ Vue.use(ElementUI, { size: 'mini', zIndex: 3000 })
 window.app = new Vue({
   el: '#app',
   router,
-  // store,
+  store,
   template: '<App/>',
   components: {
     App

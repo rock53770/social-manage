@@ -20,7 +20,7 @@
       background-color="#304156"
       text-color="#fff"
       active-text-color="#ffd04b">
-      <el-menu-item :index="nowList.path + '/' + i.path" v-for="(i,index) in nowList.children" :key="index" >
+      <el-menu-item :index="nowobj.path + '/' + i.path" v-for="(i,index) in nowobj.children" :key="index" >
         <i class="el-icon-menu"></i>
         <span slot="title">{{i.meta.title}}</span>
       </el-menu-item>
@@ -38,9 +38,9 @@
       sideBar () {
         return this.$store.state.app.sideBar
       },
-      nowList () {
+      nowobj () {
         let now = this.$store.state.nav.now
-        return this.$store.state.nav.allList[now]
+        return this.$store.state.nav.allList[now] || {}
       },
     },
     methods: {

@@ -5,6 +5,7 @@ import app from './modules/app'
 import nav from './modules/nav'
 import tagsView from './modules/tagsView'
 import permission from './modules/permission'
+import user from './modules/user'
 
 Vue.use(Vuex)
 const store = new Vuex.Store({
@@ -14,7 +15,8 @@ const store = new Vuex.Store({
     app,
     nav,
     tagsView,
-    permission
+    permission,
+    user
 	},
   strict: process.env.NODE_ENV !== 'production',
   plugins: [

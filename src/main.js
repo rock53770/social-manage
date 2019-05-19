@@ -15,11 +15,9 @@ import './directive/index'
 import './filter/index'
 import store from './store/index'
 
-
 import './assets/main.less'
 import App from './App'
 import router from './router'
-
 Vue.config.productionTip = false
 Vue.use(ElementUI, { size: 'mini', zIndex: 3000 })
 

@@ -3,25 +3,30 @@ export default {
 	namespaced: false,
 	state: {
     now:0,
-		allList:[{
+    allList:[],
+		allList1:[{
       path: '/land',
       meta:{
           title:'登录门户',
+          roles:['admin','manager']
       },
       children: [{
         path: 'manager',
         meta:{
             title:'管理员',
+            roles:['admin']
         }
       },{
         path: 'operator',
         meta:{
             title:'操作员',
+            roles:['admin']
         }
       },{
         path: 'leader',
         meta:{
             title:'领导',
+            roles:['manager']
         }
       }]
     },{

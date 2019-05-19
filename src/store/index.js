@@ -4,6 +4,7 @@ import createPersistedState from 'vuex-persistedstate'
 import app from './modules/app'
 import nav from './modules/nav'
 import tagsView from './modules/tagsView'
+import permission from './modules/permission'
 
 Vue.use(Vuex)
 const store = new Vuex.Store({
@@ -12,7 +13,8 @@ const store = new Vuex.Store({
 	modules: {
     app,
     nav,
-    tagsView
+    tagsView,
+    permission
 	},
   strict: process.env.NODE_ENV !== 'production',
   plugins: [

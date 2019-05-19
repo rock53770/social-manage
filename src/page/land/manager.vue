@@ -19,6 +19,7 @@ export default {
   },
   mounted() {
     setPageTitle('管理员');
+    console.log("管理员")
   },
   methods: {
     aa() {

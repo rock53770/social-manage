@@ -16,6 +16,8 @@ const mutations = {
     if (!view.meta.noCache) {
       state.cachedViews.push(view.name)
     }
+    console.log(111)
+    console.log(state.cachedViews)
   },
 
   DEL_VISITED_VIEW: (state, view) => {

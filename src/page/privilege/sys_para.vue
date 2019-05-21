@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'manager',
+  name: 'sys_para',
   data() {
     return {
       id: null,
@@ -18,7 +18,7 @@ export default {
   created() {
   },
   mounted() {
-    setPageTitle('系统参数');
+    console.log('sys_para');
   },
   methods: {
     aa() {

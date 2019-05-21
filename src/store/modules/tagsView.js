@@ -10,14 +10,14 @@ const mutations = {
     //   title: view.name || 'no-name'
     // })
     state.visitedViews.push(view)
+    console.log(666)
+    console.log(state.visitedViews)
   },
   ADD_CACHED_VIEW: (state, view) => {
     if (state.cachedViews.includes(view.name)) return
     if (!view.meta.noCache) {
       state.cachedViews.push(view.name)
     }
-    console.log(111)
-    console.log(state.cachedViews)
   },
 
   DEL_VISITED_VIEW: (state, view) => {

@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'manager',
+  name: 'api_manage',
   data() {
     return {
       id: null,
@@ -18,7 +18,7 @@ export default {
   created() {
   },
   mounted() {
-    setPageTitle('组织机构');
+    console.log('api_manage');
   },
   methods: {
     aa() {

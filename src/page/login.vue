@@ -41,7 +41,7 @@ export default {
         password: this.password
       };
       this.$store.dispatch('user/login',params).then((res)=>{
-        this.$router.push("/")
+        this.$router.push("/doc/index")
       })
     },
   },

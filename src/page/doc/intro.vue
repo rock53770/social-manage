@@ -1,12 +1,12 @@
 <template>
   <div class="">
-    manager
+    首页   这里放一些 系统操作指引
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ftp_manage',
+  name: 'intro',
   data() {
     return {
       id: null,
@@ -18,7 +18,7 @@ export default {
   created() {
   },
   mounted() {
-    console.log('ftp_manage');
+    console.log("系统操作指引")
   },
   methods: {
     aa() {

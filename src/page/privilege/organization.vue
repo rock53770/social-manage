@@ -1,12 +1,12 @@
 <template>
   <div class="">
-    manager
+    organization
   </div>
 </template>
 
 <script>
 export default {
-  name: 'manager',
+  name: 'organization',
   data() {
     return {
       id: null,
@@ -16,9 +16,9 @@ export default {
 
   },
   created() {
+    console.log("organization")
   },
   mounted() {
-    setPageTitle('组织机构');
   },
   methods: {
     aa() {

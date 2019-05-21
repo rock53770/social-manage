@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'manager',
+  name: 'user_manage',
   data() {
     return {
       id: null,
@@ -18,7 +18,7 @@ export default {
   created() {
   },
   mounted() {
-    setPageTitle('管理员');
+    console.log('user_manage');
   },
   methods: {
     aa() {

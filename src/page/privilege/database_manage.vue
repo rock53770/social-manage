@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'manager',
+  name: 'database_manage',
   data() {
     return {
       id: null,
@@ -18,7 +18,7 @@ export default {
   created() {
   },
   mounted() {
-    setPageTitle('操作员');
+    console.log('database_manage');
   },
   methods: {
     aa() {

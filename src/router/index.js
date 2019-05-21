@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import { constantRoutes } from './routes'
-import Layout from '@/page/layout/Layout'
+import asyncRoutes from './routes'
+import Layout from '@/layout/Layout'
 import Login from '@/page/login'
+import Intro from '@/page/doc/intro'
+import redirect from '@/page/redirect/index'
 Vue.use(Router)
-function loadable(Asyncfn) {
-  return Asyncfn
-}
+// function loadable(Asyncfn) {
+//   return Asyncfn
+// }
 const constantRoutes = [{
   path: '/',
   redirect: '/land/manager'
@@ -14,123 +16,35 @@ const constantRoutes = [{
   path: '/login',
   name: 'login',
   component: Login
-}]
-
-const asyncRoutes = [{
-  path: '/land',
+},{
+  path: '/redirect',
   component: Layout,
-  meta: {
-    requireLogin: true,
-    title:'登陆门户'
-  },
-  children: [{
-    path: 'manager',
-    name: 'land-manager',
-    meta: {
-      title: '管理员'
-    },
-    component: loadable(() => import( /* webpackChunkName: "land" */ '@/page/land/manager')),
-  }, {
-    path: 'operator',
-    name: 'land-operator',
-    meta: {
-      title: '操作员'
-    },
-    component: loadable(() => import( /* webpackChunkName: "land" */ '@/page/land/operator')),
-  }, {
-    path: 'leader',
-    name: 'land-leader',
-    meta: {
-      title: '领导'
-    },
-    component: loadable(() => import( /* webpackChunkName: "land" */ '@/page/land/leader')),
-  }]
-}, {
-  path: '/privilege',
-  component: Layout,
-  meta: {
-    requireLogin: true,
-    title:'权限管理'
-  },
-  children: [{
-    path: 'organization',
-    name: 'organization',
-    meta: {
-      title: '组织'
-    },
-    component: loadable(() => import( /* webpackChunkName: "privilege" */ '@/page/privilege/organization')),
-  }, {
-    path: 'user_manage',
-    name: 'user_manage',
-    meta: {
-      title: '用户管理'
-    },
-    component: loadable(() => import( /* webpackChunkName: "privilege" */ '@/page/privilege/user_manage')),
-  }, {
-    path: 'role_manage',
-    name: 'role_manage',
-    meta: {
-      title: '角色管理'
-    },
-    component: loadable(() => import( /* webpackChunkName: "privilege" */ '@/page/privilege/role_manage')),
-  }, {
-    path: 'sys_para',
-    name: 'sys_para',
-    meta: {
-      title: '系统参数'
-    },
-    component: loadable(() => import( /* webpackChunkName: "privilege" */ '@/page/privilege/sys_para')),
-  }, {
-    path: 'data_dictionary',
-    name: 'data_dictionary',
-    meta: {
-      title: '数据字典'
-    },
-    component: loadable(() => import( /* webpackChunkName: "privilege" */ '@/page/privilege/data_dictionary')),
-  }, {
-    path: 'log_manage',
-    name: 'log_manage',
-    meta: {
-      title: '日志管理'
-    },
-    component: loadable(() => import( /* webpackChunkName: "privilege" */ '@/page/privilege/log_manage')),
-  }, {
-    path: 'database_manage',
-    name: 'database_manage',
-    meta: {
-      title: '数据库管理'
-    },
-    component: loadable(() => import( /* webpackChunkName: "privilege" */ '@/page/privilege/database_manage')),
-  }, {
-    path: 'ftp_manage',
-    name: 'ftp_manage',
-    meta: {
-      title: 'FTP管理'
-    },
-    component: loadable(() => import( /* webpackChunkName: "privilege" */ '@/page/privilege/ftp_manage')),
-  }, {
-    path: 'api_manage',
-    name: 'api_manage',
-    meta: {
-      title: 'API管理'
-    },
-    component: loadable(() => import( /* webpackChunkName: "privilege" */ '@/page/privilege/api_manage')),
-  }]
-}, {
-  path: '/resource',
-  component: Layout,
-  meta: {
-    requireLogin: true,
-    title:'资源管理'
-  },
-  children: [{
-    path: 'manager',
-    meta: {
-      title: '管理员',
+  children: [
+    {
+      path: '/redirect/:path*',
+      component: redirect
     }
+  ]
+},{
+  path: '/doc',
+  component: Layout,
+  meta: {
+    requireLogin: false,
+  },
+  children: [{
+    path: 'index',
+    name: 'intro',
+    meta: {
+      affix:true,
+      title:'首页'
+    },
+    component: Intro,
   }]
 }]
-
+const lastRoutes = [{
+  path: '*',
+  redirect: '/'
+}]
 function generateAllNavList(routes) {
   const res = []
   routes.forEach(route => {
@@ -143,7 +57,10 @@ function generateAllNavList(routes) {
   })
   return res
 }
+let allConstantList = generateAllNavList(constantRoutes)
 let allNavList = generateAllNavList(asyncRoutes)
+
+
 export function generatePermissNavList(asyncRoutes,a) {
   const res = []
 
@@ -161,10 +78,7 @@ export function generatePermissNavList(asyncRoutes,a) {
   return res
 }
 
-const lastRoutes = [{
-  path: '*',
-  redirect: '/'
-}]
+
 
 const createRouter = () => new Router({
   mode: 'history',
@@ -222,6 +136,7 @@ export {
   constantRoutes,
   asyncRoutes,
   allNavList,
+  allConstantList,
   resetRouter
 }
 export default router

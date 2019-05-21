@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'manager',
+  name: 'land-leader',
   data() {
     return {
       id: null,
@@ -28,9 +28,9 @@ export default {
 
   },
   created() {
+    console.log("land-leader")
   },
   mounted() {
-    setPageTitle('领导');
   },
   methods: {
     aa() {

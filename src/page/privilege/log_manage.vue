@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'manager',
+  name: 'log_manage',
   data() {
     return {
       id: null,
@@ -18,7 +18,6 @@ export default {
   created() {
   },
   mounted() {
-    setPageTitle('操作员');
   },
   methods: {
     aa() {

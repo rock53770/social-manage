@@ -44,7 +44,7 @@
 
 <script>
 export default {
-  name: 'manager',
+  name: 'land-operator',
   data() {
     return {
       id: null,
@@ -54,9 +54,9 @@ export default {
 
   },
   created() {
+    console.log("land-operator")
   },
   mounted() {
-    setPageTitle('操作员');
   },
   methods: {
     aa() {
